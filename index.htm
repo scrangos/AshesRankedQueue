@@ -48,7 +48,7 @@ font-size: 10px;
 font-family: Arial;
 }
  </style>
-	
+	https://ashesescalation-api-tachyon.stardock.net/v1/products/2641/matchmaking/currentplayers
     <script type="text/javascript">
         var mainUrl = "https://ashesescalation-api-tachyon.stardock.net";
         ion.sound({
@@ -257,17 +257,17 @@ font-family: Arial;
             {
                 excludedPlayerText = 'Excluded Player: <a href="https://metaverse.engineer4business.com/PlayerDetails.aspx?personaId=' + player.excludedPlayer + '">' + getPlayerInfo(player.excludedPlayer).name + '</a>';
             }
-            return "<li class='playerLine list-group-item'><a target='_blank' href='" + link + "'><img src=" + player.info.avatarURL + "></img> " + player.info.name + "</a>" + "&nbsp;&nbsp;I&nbsp;&nbsp;Rank: " + player.score + "&nbsp;&nbsp;I&nbsp;&nbsp;" + excludedPlayerText +"<br />" +"Time waiting: " + dur.humanize() + " " + versionText + "</li>"
+            return "<li class='playerLine list-group-item'>img src=" + player.info.avatarURL + "></img> " + player.info.name + "&nbsp;&nbsp;I&nbsp;&nbsp;Rank: " + player.score + "&nbsp;&nbsp;I&nbsp;&nbsp;" + excludedPlayerText +"<br />" +"Time waiting: " + dur.humanize() + " " + versionText + "</li>"
         }
 
         function makePlayerLogLine(player) {
 
-            var link = "https://metaverse.engineer4business.com/PlayerDetails.aspx?personaId=" + player.persona + "&name=" + player.info.name;
+	    // var link = "https://metaverse.engineer4business.com/PlayerDetails.aspx?personaId=" + player.persona + "&name=" + player.info.name;
             var timeDif = Date.now() - player.lastSeen;
             var dur = moment.duration(timeDif);
             //var versionText = "<span class='gameVersionText'>" + player.platform + "</span>";
             var platformIcon = player.platform == "Steam" ? steamIcon : gogIcon
-            return "<li class='playerLogLine'><a target='_blank' href='" + link + "'><img src=" + player.info.avatarURL + "></img> " + player.info.name + " (Rank: " + player.score + ") " + "</a> Last seen: " + dur.humanize() + " ago " + platformIcon + "</li>"
+            return "<li class='playerLogLine'><img src=" + player.info.avatarURL + "></img> " + player.info.name + " (Rank: " + player.score + ") " + "Last seen: " + dur.humanize() + " ago " + platformIcon + "</li>"
         }
 
         function msToTime(ms) {
@@ -394,7 +394,7 @@ font-family: Arial;
     </div>
 	</div>
 	<br />
-	<div class="container" style="color: #ffffff;">
+	<div class="container" style="background-color: hsla(240, 100%, 50%, 0.5); color: #ffffff;">
 	<div class="footer text-center" style="margin-bottom: 0">
 		<p>Help to update this code: <a href="https://github.com/warrenkc/AshesRankedQueue">GitHub Respository</a> This website is created for the Ashes of the Singularity Community. Ashes of the Singularity is a trademark of Stardock Entertainment, and is not the property of the developers of this website. Any and all images, content, information, etc. on this website might be property of Stardock Entertainment, so please contact them for the use of anything on this website. Stardock Entertainment's website is <a href="http://www.stardock.com" target="_blank">www.stardock.com</a>. Thank you for visiting!</p>
 </div>
