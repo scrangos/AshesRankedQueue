@@ -256,7 +256,7 @@ font-family: Arial;
             {
                 excludedPlayerText = 'Excluded Player: <a href="https://metaverse.engineer4business.com/PlayerDetails.aspx?personaId=' + player.excludedPlayer + '">' + getPlayerInfo(player.excludedPlayer).name + '</a>';
             }
-            return "<li class='playerLine list-group-item'>img src=" + player.info.avatarURL + "></img> " + player.info.name + "&nbsp;&nbsp;I&nbsp;&nbsp;Rank: " + player.score + "&nbsp;&nbsp;I&nbsp;&nbsp;" + excludedPlayerText +"<br />" +"Time waiting: " + dur.humanize() + " " + versionText + "</li>"
+            return "<li class='playerLine list-group-item'><img src=" + player.info.avatarURL + "></img> " + player.info.name + "&nbsp;&nbsp;I&nbsp;&nbsp;Rank: " + player.score + "&nbsp;&nbsp;I&nbsp;&nbsp;" + excludedPlayerText +"<br />" +"Time waiting: " + dur.humanize() + " " + versionText + "</li>"
         }
 
         function makePlayerLogLine(player) {
