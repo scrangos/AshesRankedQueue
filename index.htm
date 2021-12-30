@@ -61,58 +61,15 @@ font-family: Arial;
             preload: true
         });
 		
-		window.onload = function() {
-			window.notify = {
-				list: [],
-				id: 0,
-				log: function(msg) {
-					var console = document.getElementById('console');
-					console.innerHTML += ("\n"+msg);
-					console.scrollTop = console.scrollHeight;
-				},
-				compatible: function() {
-					if (typeof Notification === 'undefined') {
-						notify.log("Notifications are not available for your browser.");
-						return false;
-					}
-					return true;
-				},
-				authorize: function() {
-					if (notify.compatible()) {
-						Notification.requestPermission(function(permission) {
-							notify.log("Permission to display: "+permission);
-						});
-					}
-				},
-				show: function(playerInfo) {
-
-					if (typeof Notification === 'undefined') { notify.log("Notifications are not available for your browser."); return; }
-					if (notify.compatible()) {
-						notify.id++;
-						var id = notify.id;
-						notify.list[id] = new Notification("Notification #"+id, {
-							body: "There is a new player in the 1v1 Ashes Queue.\n"+playerInfo.name,
-							tag: id,
-							icon: playerInfo.avatarURL,
-							lang: "",
-							dir: "auto",
-						});
-						notify.log("Notification #"+id+" queued for display");
-						notify.list[id].onclick = function() { notify.logEvent(id, "clicked"); };
-						notify.list[id].onshow  = function() { notify.logEvent(id, "showed");  };
-						notify.list[id].onerror = function() { notify.logEvent(id, "errored"); };
-						notify.list[id].onclose = function() { notify.logEvent(id, "closed");  };
-
-						console.log("Created a new notification ...");
-						console.log(notify.list[id]);
-					}
-				},
-				logEvent: function(id, event) {
-					notify.log("Notification #"+id+" "+event);
-				}
-			};
-		};
-
+		
+		function enableNotifications(){
+		Notification.requestPermission();
+		}
+		
+		function notificationShow(playerInfo) {
+		var notification = new Notification("Player Found",{body: "\n\n"+playerInfo.name+" has joined the queue!", icon: playerInfo.avatarURL});
+		}
+		
         var shownError = false;
         (function poll() {
             var url = mainUrl + "/v1/products/2641/matchmaking/currentplayers";
@@ -273,10 +230,12 @@ font-family: Arial;
             for (var persona in curQueue) {
                 if (!prevQueue[persona]) {
                     playerJoined = true;
-					
-                    ion.sound.play("graceful");
 					var player_info_notification = getPlayerInfo(persona);
-					notify.show(player_info_notification);
+					notificationShow(player_info_notification);
+					console.log(player_info_notification)
+					console.log(persona)
+                    ion.sound.play("graceful");
+
                     break;
                 }
             }
@@ -378,7 +337,7 @@ font-family: Arial;
         }
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6605473-18"></script>
+
     <script>
 
         window.dataLayer = window.dataLayer || [];
@@ -392,6 +351,10 @@ font-family: Arial;
 	<button type="button" class="btn btn-light rounded-0" onclick="window.open('https://discord.gg/2mQVpxBBUu', '_blank')">Ashes on Discord</button>
 	<button type="button" class="btn btn-light rounded-0" onclick="window.open('https://www.ashesofthesingularity.com/', '_blank')">Ashes Website</button>
 	<button type="button" class="btn btn-light rounded-0" onclick="window.open('https://www.stardock.com/', '_blank')">Stardock Website</button>
+	</div>
+		<br />	
+	<div class="btn-toolbar" role="toolbar">	
+	<button onclick="enableNotifications()">-!Enable Notifications!-</button>
 	</div>
 	<br />
 		<div class="container rounded">
